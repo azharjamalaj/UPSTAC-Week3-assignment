@@ -20,6 +20,7 @@ import org.upgrad.upstac.users.User;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.NOT_IMPLEMENTED;
 import static org.upgrad.upstac.exception.UpgradResponseStatusException.asBadRequest;
 import static org.upgrad.upstac.exception.UpgradResponseStatusException.asConstraintViolation;
 
@@ -65,19 +66,8 @@ public class LabRequestController {
     @PreAuthorize("hasAnyRole('TESTER')")
     public List<TestRequest> getForTester()  {
 
-        // Implement This Method
-
         User user= userLoggedInService.getLoggedInUser();
-        testRequestQueryService.findByTester(user);
-        getForTests();
-        // Create an object of User class and store the current logged in user first
-        //Implement this method to return the list of test requests assigned to current tester(make use of the above created User object)
-        //Make use of the findByTester() method from testRequestQueryService class
-        // For reference check the method getForTests() method from LabRequestController class
-
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented"); // replace this line with your code
-
-
+        return testRequestQueryService.findByTester(user);
     }
 
 
@@ -85,10 +75,7 @@ public class LabRequestController {
     @PutMapping("/assign/{id}")
     public TestRequest assignForLabTest(@PathVariable Long id) {
 
-
-
         User tester =userLoggedInService.getLoggedInUser();
-
       return   testRequestUpdateService.assignForLabTest(id,tester);
     }
 
