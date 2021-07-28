@@ -71,11 +71,8 @@ public class ConsultationController {
     @PutMapping("/assign/{id}")
     public TestRequest assignForConsultation(@PathVariable Long id) {
 
-       //Create an object of User class and get the current logged in user
-        //Create an object of TestRequest class and use the assignForConsultation() method of testRequestUpdateService to assign the particular id to the current user
-
         try {
-            
+
             User doctor =userLoggedInService.getLoggedInUser();
             return   testRequestUpdateService.assignForConsultation(id,doctor);
 
@@ -90,21 +87,11 @@ public class ConsultationController {
     @PutMapping("/update/{id}")
     public TestRequest updateConsultation(@PathVariable Long id,@RequestBody CreateConsultationRequest testResult) {
 
-        // Implement this method
-
-        // Implement this method to update the result of the current test request id with test doctor comments
-        // Create an object of the User class to get the logged in user
-        // Create an object of TestRequest class and make use of updateConsultation() method from testRequestUpdateService class
-        //to update the current test request id with the testResult details by the current user(object created)
-        // For reference check the method updateLabTest() method from LabRequestController class
-
         try {
             // replace this line of code with your implementation
             User doctor=userLoggedInService.getLoggedInUser();
-
+//            TestRequest testRequest=testRequestUpdateService.updateConsultation(id,testResult,doctor);
             return testRequestUpdateService.updateConsultation(id,testResult,doctor);
-//            throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented");
-
 
         } catch (ConstraintViolationException e) {
             throw asConstraintViolation(e);
